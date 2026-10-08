@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonus Divinus - Instrumentos de Banda</title>
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #d97706;
+            --accent-hover: #b45309;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --whatsapp: #25d366;
+            --whatsapp-dark: #128c7e;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        /* LOGO JP */
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-jp {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 12px rgba(217, 119, 6, 0.5);
+            border: 2px solid #ffffff;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-jp:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-jp span {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-family: 'Georgia', serif;
+            letter-spacing: -1px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        nav { background-color: var(--white); border-bottom: 1px solid #e2e8f0; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; padding: 0 20px; }
+        .nav-tab {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title {
+            font-size: 1.8rem;
+            margin: 30px 0 20px 0;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+
+        .card-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+        .badge-pro { background-color: #fef3c7; color: #b45309; }
+        .badge-semi { background-color: #e0f2fe; color: #0369a1; }
+        .badge-normal { background-color: #dcfce7; color: #15803d; }
+
+        .card-title { font-size: 1.1rem; margin-bottom: 8px; color: var(--primary); }
+        .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; }
+        .card-price { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
+
+        .btn-buy {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        .btn-buy:hover { background-color: var(--accent); }
+
+        .info-box {
+            background-color: var(--white);
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 50px;
+            box-shadow: var(--shadow);
+        }
+        .info-box h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .info-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            margin-top: 60px;
+            padding: 40px 0 20px 0;
+            border-top: 4px solid var(--accent);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .footer-section p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--whatsapp);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: var(--whatsapp-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            padding: 20px 20px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.85);
+            justify-content: center; align-items: center;
+            z-index: 1001; padding: 20px;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-container">
+                <div class="logo-jp">
+                    <span>JP</span>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Sonus Divinus</span>
+                    <span class="logo-subtitle">Instrumentos de Banda</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-tab active" onclick="switchTab('vientos', event)">Instrumentos de Viento</div>
+            <div class="nav-tab" onclick="switchTab('percusion', event)">Instrumentos de Percusión</div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- SECCIÓN VIENTOS -->
+        <section id="vientos" class="section-content active">
+            
+            <!-- TROMPETAS -->
+            <h2 class="section-title">Trompetas</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDz3XmaCCc9rILBnRWwGJ5mhiKRcKctjKSZLxNvKNQkA&s=10" class="card-img" alt="Trompeta Economica">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Trompeta Estudiante Sib</h3>
+                        <p class="card-desc">Ideal para estudiantes e iniciación. Incluye boquilla 7C y estuche rígido.</p>
+                        <div class="card-price">1,250 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Trompeta Estudiante Sib (Económica)', '1,250 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpv5Asd-Sfs3CD8x-52DKsFMpAkI44U9-_EEGXy-2KlA&s=10" class="card-img" alt="Trompeta Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Trompeta Intermedia Sib</h3>
+                        <p class="card-desc">Acabado lacado brillante, respuesta rápida, excelente afinación para banda.</p>
+                        <div class="card-price">2,800 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Trompeta Intermedia Sib (Semiprofesional)', '2,800 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80" class="card-img" alt="Trompeta Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Trompeta Custom Sib Pro</h3>
+                        <p class="card-desc">Bombas monel, campana martillada a mano. Proyección y potencia acústica superior.</p>
+                        <div class="card-price">4,500 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Trompeta Custom Sib (Profesional)', '4,500 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BARÍTONOS -->
+            <h2 class="section-title">Barítonos</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSElkPN1N5tl5VO_B2dcHg6qWNu_rIK30YCNXiQ0J8Ltg&s=10" class="card-img" alt="Baritono Economico">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Barítono Estudiante Sib</h3>
+                        <p class="card-desc">Construcción ligera y fácil emisión. Incluye estuche y boquilla.</p>
+                        <div class="card-price">2,400 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Barítono Estudiante Sib (Económica)', '2,400 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8_ChVHjc9lOCoLhYksq6fRWdp2i5xK4LXy36SdIz7jQ&s=10" class="card-img" alt="Baritono Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Barítono de Marcha Sib</h3>
+                        <p class="card-desc">3 pistones de acción superior, excelente sonoridad y cuerpo en graves.</p>
+                        <div class="card-price">3,800 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Barítono de Marcha Sib (Semiprofesional)', '3,800 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3EHuAS2TIogm3O07EeNEUDCJBLL0GDGgeHfiHwCB-JA&s=10" class="card-img" alt="Eufonio Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Eufonio Compensado 4 Pistones</h3>
+                        <p class="card-desc">Sistema compensado, afinación perfecta para solistas y bandas profesionales.</p>
+                        <div class="card-price">6,200 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Eufonio Compensado 4P (Profesional)', '6,200 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAXOFONES -->
+            <h2 class="section-title">Saxofones</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk3Weo8urFaCcuEjbv1yBs7dtyK0BybWkK5OU0fnUc3Q&s=10" class="card-img" alt="Saxofon Economico">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Saxofón Alto Eb Estudiante</h3>
+                        <p class="card-desc">Ligero y ergonómico. Viene con estuche mochilero, caña y kit de limpieza.</p>
+                        <div class="card-price">2,100 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Saxofón Alto Eb (Económica)', '2,100 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmXMxRoU71dL66aaZqwkh3hedbgL4ccjE7oICvpWTeZA&s=10" class="card-img" alt="Saxofon Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Saxofón Alto Eb Studio</h3>
+                        <p class="card-desc">Llave de Fa# alto, mecanismos precisos, proyección potente y equilibrada.</p>
+                        <div class="card-price">4,500 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Saxofón Alto Eb Studio (Semiprofesional)', '4,500 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDAw0PzrJFKmv2aeqLRXM7WCii3cJGztoWf7jF2Y5oXg&s=10" class="card-img" alt="Saxofon Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Saxofón Tenor Bb Custom Pro</h3>
+                        <p class="card-desc">Zapatillas italianas de cuero, grabados a mano, sonido cálido y resonante.</p>
+                        <div class="card-price">7,100 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Saxofón Tenor Bb Custom (Profesional)', '7,100 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLARINETES -->
+            <h2 class="section-title">Clarinetes</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ShGlIirpMHiLIfSQv1a4fw98BqjFHaavDLUAcV1-yQ&s=10" class="card-img" alt="Clarinete Economico">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Clarinete Bb Estudiante ABS</h3>
+                        <p class="card-desc">Resina ABS resistente al clima, ideal para desfiles y exteriores. 17 llaves.</p>
+                        <div class="card-price">1,200 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Clarinete Bb Estudiante (Económica)', '1,200 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ3yI7rILjKscWV6dsrBOnk1vVEeJVZD9ksn0eu7Gbyg&s" class="card-img" alt="Clarinete Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Clarinete Bb Madera Ebonita</h3>
+                        <p class="card-desc">Cuerpo de ebonita de alta densidad, llaves niqueladas con excelente tacto.</p>
+                        <div class="card-price">2,600 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Clarinete Bb Ebonita (Semiprofesional)', '2,600 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR26nDKMFOrrE3PH5AOKVJMfm9bKSKHTfj2o-ndijxbdw&s=10" class="card-img" alt="Clarinete Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Clarinete Bb Madera Granadilla Pro</h3>
+                        <p class="card-desc">Madera de granadilla seleccionada, zapatillas de cuero y llaves plateadas.</p>
+                        <div class="card-price">5,300 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Clarinete Bb Granadilla (Profesional)', '5,300 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🎺 ¿A qué se dedican los Instrumentos de Viento en la Banda?</h3>
+                <p>
+                    Los instrumentos de viento (trompetas, saxofones, clarinetes y barítonos) son los encargados de **dar la melodía y la armonía** a las canciones. A través de la vibración del aire, ejecutan la voz principal, los contrapuntos y las voces secundarias, dando el carácter emotivo, brillante y expresivo a la música.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN PERCUSIÓN -->
+        <section id="percusion" class="section-content">
+            
+            <!-- BOMBO DE MARCHA -->
+            <h2 class="section-title">Bombos de Marcha</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_X8odi_DtuW9QQ3Aub_k497MPn_u7u_t8IHzi3IA-mw&s=10" class="card-img" alt="Bombo Economico">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Bombo Estudiante 20"</h3>
+                        <p class="card-desc">Ultra ligero y de bajo costo para largas marchas. Incluye mazo y correa.</p>
+                        <div class="card-price">980 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Bombo Estudiante 20 (Económica)', '980 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ4AybvmT9048gUaiCPL0uTkiG7ZFMhyvDBh-q8VoLzQ&s=10" class="card-img" alt="Bombo Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Bombo de Marcha 22"</h3>
+                        <p class="card-desc">Casco de arce de 6 capas, afinación estable y sonido profundo.</p>
+                        <div class="card-price">2,100 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Bombo de Marcha 22 (Semiprofesional)', '2,100 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMmXVuKAA70ZUPCAxh_CriyP2DTpjqfmKzZv-rwCs2g&s=10" class="card-img" alt="Bombo Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Bombo de Marcha Pro 24"</h3>
+                        <p class="card-desc">Casco de abedul de 8 capas, arnés de aluminio ergonómico acolchado.</p>
+                        <div class="card-price">3,400 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Bombo de Marcha Pro 24 (Profesional)', '3,400 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAMBOR MILITAR -->
+            <h2 class="section-title">Tambores Militares / Cajas de Marcha</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07vqZhttGFkm-sKjy2CrygHXHMBeU2wsTzzs29uOfhA&s=10" class="card-img" alt="Tambor Economico">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Tambor Escolar 14"x3.5"</h3>
+                        <p class="card-desc">Diseño piccollo súper liviano, ideal para estudiantes. Incluye baquetas.</p>
+                        <div class="card-price">580 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Tambor Escolar 14x3.5 (Económica)', '580 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8UVgH5-2yzZtHMeWHQOTxInPpaRXGM9TzpJS3KV_zDw&s=10" class="card-img" alt="Tambor Semiprofesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Tambor Militar 14"x5.5"</h3>
+                        <p class="card-desc">Casco metálico cromado, entorchado sensible, aro de alta resistencia.</p>
+                        <div class="card-price">1,100 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Tambor Militar 14x5.5 (Semiprofesional)', '1,100 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBzOfGj2dxd807qwts6bmvhczPGFkTe3gYf16WZlIP2w&s=10" class="card-img" alt="Caja Profesional">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Tambor profesional de alta tension</h3>
+                        <p class="card-desc">Diseñada para competencia. Soporta parches de Kevlar, ataque potente.</p>
+                        <div class="card-price">2,600 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Caja de Marcha Alta Tension (Profesional)', '2,600 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLATILLOS DE BANDA -->
+            <h2 class="section-title">Platillos de Banda</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://ultramaraudio.com/wp-content/uploads/2024/08/m1-1.jpg" class="card-img" alt="Platillos Economicos">
+                    <div class="card-body">
+                        <span class="card-badge badge-normal">Económica</span>
+                        <h3 class="card-title">Platillos de Marcha 14" (Par)</h3>
+                        <p class="card-desc">Aleación de latón liviana, ideal para principiantes y bandas escolares.</p>
+                        <div class="card-price">650 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Platillos Marcha 14 Par (Económica)', '650 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzz-qzkjA7EwFGhKNTezO2InvmP_PveaFmLzKlQxHw5Q&s=10" class="card-img" alt="Platillos Semiprofesionales">
+                    <div class="card-body">
+                        <span class="card-badge badge-semi">Semiprofesional</span>
+                        <h3 class="card-title">Platillos Choque 16" (Par)</h3>
+                        <p class="card-desc">Aleación B8, sonido brillante y explosivo. Incluye pad de agarre y correas de cuero.</p>
+                        <div class="card-price">1,350 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Platillos Choque 16 Par (Semiprofesional)', '1,350 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6dJayfkvjyqqUGRVzVxMxsXlVc7EOETOVh43jVy_CtA&s=10" class="card-img" alt="Platillos Profesionales">
+                    <div class="card-body">
+                        <span class="card-badge badge-pro">Profesional</span>
+                        <h3 class="card-title">Platillos Marcha B20 18" (Par)</h3>
+                        <p class="card-desc">Bronze B20 profesional, martillado artesanal, increíble proyección y armónicos.</p>
+                        <div class="card-price">2,950 Bs</div>
+                        <button class="btn-buy" onclick="openCheckout('Platillos Marcha B20 18 Par (Profesional)', '2,950 Bs')">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🥁 ¿A qué se dedican los Instrumentos de Percusión en la Banda?</h3>
+                <p>
+                    Los instrumentos de percusión (bombos, tambores y platillos) son el motor de la banda y se encargan de **marcar el ritmo, el tempo y la métrica**. Proporcionan la base estructural, guían el paso durante los desfiles y agregan cortes, acentos e impacto dinámico a las interpretaciones musicales.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER CON DIRECCIÓN Y CELULAR INTEGRADOS -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="brand-container" style="margin-bottom: 15px;">
+                    <div class="logo-jp" style="width: 40px; height: 40px;">
+                        <span style="font-size: 1.2rem;">JP</span>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title" style="font-size: 1.2rem;">Sonus Divinus</span>
+                    </div>
+                </div>
+                <p>Ofrecemos la mejor calidad en instrumentos musicales para bandas escolares, universitarias y profesionales. Asesoramiento garantizado.</p>
+
+                <!-- DIRECCIÓN Y CELULAR CON ICONOS -->
+                <div style="margin-top: 15px; font-size: 0.9rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+                    <p style="margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-location-dot" style="color: var(--accent);"></i>
+                        <span><strong>Dirección:</strong> Azari</span>
+                    </p>
+                    <p style="margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-phone" style="color: var(--accent);"></i>
+                        <span><strong>Celular / WhatsApp:</strong> +591 75436615</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Atención Personalizada</h4>
+                <div class="whatsapp-card">
+                    <p style="color: #fff; font-weight: 600; margin-bottom: 5px;">¿Tienes dudas o buscas algo específico?</p>
+                    <p style="font-size: 0.85rem; margin-bottom: 15px;">Escríbenos directamente por WhatsApp y te asesoramos al instante.</p>
+                    <a href="https://wa.me/59175436615?text=Hola,%20quisiera%20hacer%20una%20consulta%20sobre%20un%20instrumento%20espec%C3%ADfico" target="_blank" class="btn-whatsapp">
+                        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Contactar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 JP Sonus Divinus. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- MODAL DE CHECKOUT -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCheckout()">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 5px;">Finalizar Pedido</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Producto: <strong id="modalProductName" style="color: var(--text-dark);"></strong></p>
+            <p style="font-size: 1.2rem; color: var(--accent); font-weight: 700; margin-bottom: 20px;">Total: <span id="modalProductPrice"></span></p>
+
+            <form action="https://formspree.io/f/mppadjzo" method="POST">
+                <input type="hidden" name="Producto" id="hiddenProduct">
+                <input type="hidden" name="Precio" id="hiddenPrice">
+
+                <div class="form-group">
+                    <label for="fullName">Nombre Completo *</label>
+                    <input type="text" id="fullName" name="Nombre" required placeholder="Ej. Juan Pérez">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="Correo" required placeholder="ejemplo@correo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Teléfono de Contacto *</label>
+                    <input type="tel" id="phone" name="Teléfono" required placeholder="+591 70000000">
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Ciudad / Dirección *</label>
+                    <input type="text" id="city" name="Ciudad" required placeholder="Ej. La Paz, Zona Central">
+                </div>
+
+                <!-- PASO DE PAGO POR WHATSAPP -->
+                <div class="form-group" style="text-align: center; margin: 20px 0; background: #f1f5f9; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary);">Paso 1: Solicitar y realizar el Pago</label>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                        Presiona el siguiente botón para solicitar el código QR de pago oficial directamente a nuestro WhatsApp:
+                    </p>
+                    
+                    <a id="btnSendWhatsApp" href="#" target="_blank" class="btn-whatsapp" style="width: 100%; border-radius: 6px; padding: 10px 0; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Solicitar QR por WhatsApp
+                    </a>
+                </div>
+
+                <label style="display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary);">Paso 2: Confirmar pedido</label>
+                <button type="submit" class="btn-buy" style="margin-top: 5px;">Confirmar y Enviar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.section-content').forEach(section => section.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function openCheckout(productName, price) {
+            document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('modalProductPrice').textContent = price;
+            document.getElementById('hiddenProduct').value = productName;
+            document.getElementById('hiddenPrice').value = price;
+            
+            // Reemplaza el número de abajo por tu WhatsApp real (código de país sin signo +)
+            var myPhoneNumber = "59175436615"; 
+            
+            // Mensaje preescrito enviado por el cliente
+            var textMessage = "Hola, estoy completando mi formulario de compra para el producto: *" + productName + "* (" + price + "). Por favor envíeme el código QR para realizar el pago.";
+            
+            var whatsappUrl = "https://wa.me/" + myPhoneNumber + "?text=" + encodeURIComponent(textMessage);
+            document.getElementById('btnSendWhatsApp').href = whatsappUrl;
+            
+            document.getElementById('checkoutModal').style.display = 'flex';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
